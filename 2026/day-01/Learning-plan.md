@@ -15,6 +15,21 @@ I want to become one of the top  DevOps engineers in the world through consisten
 # Current Level?
 I am a Student.
 
+# 3 clear goals for the next 90 days?
+1. Learn Linux, Git, and Docker fundamentals with daily practice.
+
+2. Build and deploy real DevOps projects using Amazon Web Services and Jenkins.
+
+3. Stay consistent for 90 days and become confident for internships and DevOps job opportunities.
+
+# 3 core Devops skills 
+Linux troubleshooting
+CI/CD pipelines
+Kubernetes debugging
+
+# Weekly time budget
+3-4 hours per day on weekends 5-6 hours
+
 
 
 
