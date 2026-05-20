@@ -79,11 +79,11 @@ Commands Used
 
 Command	Use : 
 
-systemctl status ssh	Checks SSH service status
+systemctl status ssh =	Checks SSH service status
 
-journalctl -u ssh	Shows SSH related logs
+journalctl -u ssh = 	Shows SSH related logs
 
-pgrep sshd	Verifies SSH process is running
+pgrep sshd =	Verifies SSH process is running
 
 Observations: 
 
