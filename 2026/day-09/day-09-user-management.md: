@@ -1,0 +1,351 @@
+# Day 09 – Linux User & Group Management Challenge
+
+# Day 09 Challenge
+
+## Objective
+
+Practice Linux user and group management by:
+
+* Creating users and groups
+* Assigning users to groups
+* Managing shared directories
+* Setting permissions
+* Testing access control
+
+---
+
+# Task 1: Create Users
+
+## Create Users with Home Directories
+
+```bash
+sudo useradd -m tokyo
+sudo useradd -m berlin
+sudo useradd -m professor
+```
+
+## Set Passwords
+
+```bash
+sudo passwd tokyo
+sudo passwd berlin
+sudo passwd professor
+```
+
+## Verify Users
+
+```bash
+cat /etc/passwd | grep tokyo
+cat /etc/passwd | grep berlin
+cat /etc/passwd | grep professor
+```
+
+## Verify Home Directories
+
+```bash
+ls /home
+```
+
+### Use of Commands
+
+| Command      | Use                              |
+| ------------ | -------------------------------- |
+| `useradd`    | Creates a new Linux user         |
+| `useradd -m` | Creates user with home directory |
+| `passwd`     | Sets or changes password         |
+| `cat`        | Displays file contents           |
+| `grep`       | Searches specific text           |
+| `ls`         | Lists files/directories          |
+
+---
+
+# Task 2: Create Groups
+
+## Create Groups
+
+```bash
+sudo groupadd developers
+sudo groupadd admins
+```
+
+## Verify Groups
+
+```bash
+cat /etc/group | grep developers
+cat /etc/group | grep admins
+```
+
+### Use of Commands
+
+| Command      | Use                      |
+| ------------ | ------------------------ |
+| `groupadd`   | Creates a new group      |
+| `/etc/group` | Stores group information |
+
+---
+
+# Task 3: Assign Users to Groups
+
+## Assign Users
+
+### tokyo → developers
+
+```bash
+sudo usermod -aG developers tokyo
+```
+
+### berlin → developers + admins
+
+```bash
+sudo usermod -aG developers berlin
+sudo usermod -aG admins berlin
+```
+
+### professor → admins
+
+```bash
+sudo usermod -aG admins professor
+```
+
+## Verify Group Membership
+
+```bash
+groups tokyo
+groups berlin
+groups professor
+```
+
+### Use of Commands
+
+| Command       | Use                             |
+| ------------- | ------------------------------- |
+| `usermod -aG` | Adds user to additional groups  |
+| `groups`      | Shows groups assigned to a user |
+
+---
+
+# Task 4: Shared Directory
+
+## Create Shared Directory
+
+```bash
+sudo mkdir -p /opt/dev-project
+```
+
+## Set Group Ownership
+
+```bash
+sudo chgrp developers /opt/dev-project
+```
+
+## Set Permissions
+
+```bash
+sudo chmod 775 /opt/dev-project
+```
+
+## Verify Permissions
+
+```bash
+ls -ld /opt/dev-project
+```
+
+## Test File Creation
+
+### Create File as tokyo
+
+```bash
+sudo -u tokyo touch /opt/dev-project/tokyo-file.txt
+```
+
+### Create File as berlin
+
+```bash
+sudo -u berlin touch /opt/dev-project/berlin-file.txt
+```
+
+## Verify Files
+
+```bash
+ls -l /opt/dev-project
+```
+
+### Use of Commands
+
+| Command    | Use                               |
+| ---------- | --------------------------------- |
+| `mkdir`    | Creates directories               |
+| `mkdir -p` | Creates nested directories safely |
+| `chgrp`    | Changes group ownership           |
+| `chmod`    | Changes permissions               |
+| `touch`    | Creates empty file                |
+| `sudo -u`  | Runs command as another user      |
+| `ls -ld`   | Shows directory permissions       |
+| `ls -l`    | Shows detailed file permissions   |
+
+---
+
+# Task 5: Team Workspace
+
+## Create User
+
+```bash
+sudo useradd -m nairobi
+sudo passwd nairobi
+```
+
+## Create Group
+
+```bash
+sudo groupadd project-team
+```
+
+## Add Users to Group
+
+```bash
+sudo usermod -aG project-team nairobi
+sudo usermod -aG project-team tokyo
+```
+
+## Verify Group Membership
+
+```bash
+groups nairobi
+groups tokyo
+```
+
+## Create Workspace Directory
+
+```bash
+sudo mkdir -p /opt/team-workspace
+```
+
+## Set Group Ownership
+
+```bash
+sudo chgrp project-team /opt/team-workspace
+```
+
+## Set Permissions
+
+```bash
+sudo chmod 775 /opt/team-workspace
+```
+
+## Verify Permissions
+
+```bash
+ls -ld /opt/team-workspace
+```
+
+## Test File Creation as nairobi
+
+```bash
+sudo -u nairobi touch /opt/team-workspace/nairobi-test.txt
+```
+
+## Verify Files
+
+```bash
+ls -l /opt/team-workspace
+```
+
+---
+
+# Group Assignments
+
+| User      | Groups                   |
+| --------- | ------------------------ |
+| tokyo     | developers, project-team |
+| berlin    | developers, admins       |
+| professor | admins                   |
+| nairobi   | project-team             |
+
+---
+
+# Directories Created
+
+| Directory             | Group Owner  | Permissions |
+| --------------------- | ------------ | ----------- |
+| `/opt/dev-project`    | developers   | 775         |
+| `/opt/team-workspace` | project-team | 775         |
+
+---
+
+# Understanding Permission 775
+
+| Number | Meaning                |
+| ------ | ---------------------- |
+| 7      | Read + Write + Execute |
+| 7      | Read + Write + Execute |
+| 5      | Read + Execute         |
+
+### Example
+
+```bash
+chmod 775 /opt/dev-project
+```
+
+Meaning:
+
+* Owner has full access
+* Group has full access
+* Others can only read and execute
+
+---
+
+# Commands Used
+
+```bash
+useradd
+passwd
+groupadd
+usermod
+groups
+mkdir
+chgrp
+chmod
+touch
+ls
+cat
+grep
+sudo
+```
+
+---
+
+# Important Linux Files
+
+| File             | Purpose                               |
+| ---------------- | ------------------------------------- |
+| `/etc/passwd`    | Stores user account information       |
+| `/etc/group`     | Stores group information              |
+| `/home/username` | User home directory                   |
+| `/opt/`          | Optional software/project directories |
+
+---
+
+# What I Learned
+
+1. How to create Linux users and assign passwords.
+2. How Linux groups help manage team permissions.
+3. How to create shared directories with proper access control.
+4. How Linux permissions work using chmod.
+5. How DevOps engineers manage users and teams on servers.
+
+---
+
+# Screenshot Checklist
+
+Take screenshots of added later:
+
+* `groups tokyo`
+* `groups berlin`
+* `groups professor`
+* `groups nairobi`
+* `ls -ld /opt/dev-project`
+* `ls -ld /opt/team-workspace`
+* `ls -l /opt/dev-project`
+* `ls -l /opt/team-workspace`
+* `/etc/passwd`
+* `/etc/group`
